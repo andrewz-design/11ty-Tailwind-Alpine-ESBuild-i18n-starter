@@ -1,0 +1,33 @@
+{
+  "scripts": {
+    "start": "npm-run-all clean --parallel js css eleventy browsersync",
+    "eleventy": "eleventy --watch",
+    "debug": "set DEBUG=* & eleventy",
+    "clean": "rm -rf dist",
+    "css": "postcss source/includes/styles/tailwind.css --o dist/css/style.css --watch",
+    "js": "esbuild --watch --bundle --sourcemap --outfile=dist/js/script.js source/includes/scripts/main.js",
+    "build": "rm -rf dist && cross-env NODE_ENV=production eleventy && cross-env NODE_ENV=production tailwindcss -i source/includes/styles/tailwind.css -o dist/css/style.css --minify && esbuild --minify --bundle --outfile=dist/js/script.js source/includes/scripts/main.js",
+    "browsersync": "browser-sync start --server dist --files dist --port 8080 --no-notify --no-open"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^3.1.3",
+    "@tailwindcss/typography": "^0.5.0",
+    "alpinejs": "^3.7.1",
+    "browser-sync": "^2.27.7",
+    "cross-env": "^7.0.3",
+    "cssnano": "^5.0.15",
+    "esbuild": "^0.14.51",
+    "html-minifier": "^4.0.0",
+    "js-yaml": "^4.1.0",
+    "luxon": "^2.3.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-cli": "^9.1.0",
+    "prismjs": "^1.26.0",
+    "tailwindcss": "^3.0.13"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.5"
+  }
+}
